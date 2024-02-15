@@ -1,4 +1,4 @@
-Name: Run tests for OTUS homework
+name: Run tests for OTUS homework
 
 on:
   push:
