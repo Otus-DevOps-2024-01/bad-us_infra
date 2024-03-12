@@ -37,3 +37,22 @@ User root
 bastion_IP = 84.201.141.78
 someinternalhost_IP = 10.129.0.31
 domen name = otusler.completo.su
+
+# Home Work 4 Yandex Cloud. Yandex CLi
+
+
+# Connect:
+
+testapp_IP = 84.201.174.198
+testapp_port = 9292
+test_url = http://84.201.174.198:9292
+
+# Scripts
+
+- install_ruby.sh
+- install_mongodb.sh
+- deploy.sh
+
+# Start and run
+
+    ./startup-script.sh
