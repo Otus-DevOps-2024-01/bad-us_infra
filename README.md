@@ -37,3 +37,6 @@ User root
 bastion_IP = 84.201.141.78
 someinternalhost_IP = 10.129.0.31
 domen name = otusler.completo.su
+
+testapp_IP = 158.160.85.105
+testapp_port = 9292
