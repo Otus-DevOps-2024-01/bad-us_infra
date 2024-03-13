@@ -1,24 +1,21 @@
 #cloud-config
-  users:
-    - name: yc-user
-      groups: sudo
-      shell: /bin/bash
-      sudo: 'ALL=(ALL) NOPASSWD:ALL'
-      ssh-authorized-keys:
+users:
+  - name: yc-user
+    groups: sudo
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    ssh-authorized-keys:
         - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgJc4j1ucUAh07i+GWERs8Pqn7SuTFdRP3wZOvTYQgc1rragGfQphzKKD46tstHwM3mzeJ09idESv5IoMdfgz6Qykt07E3/V6Vn3fhdoS7mRD/jxZADKJjIECYnhuGW9w+wwH3I9m21uq7kSwMJ2Qt/MAUsNEMpGPsVn2KWMJmx+SoOeQ8NXFdrstDD9JzKcZ7g2EJRSL7E3oBYIJc4SbOY5cTfxZbMBg+2xWz3fmJnJ1+giTZ8aUED0dMtt9EOk0DFXWI6HvZnXIa6/j/teiSn9e6NaLTugEWFQBBeWX+pQ9LMFkivmcKl/y+f/df4kyAEoOQUWZOMffZwlhxMP8YzWwDS+nZ+X6OS83LNVw0pDh0l7RlaFBFcTo6yKqE2xiyayFp2vUMgZitdWt7jSEjRkeYgzW/isUUkPFOma+WALCJwpcEnA9pMe5uE2+4I+9RsDIG/q7XReiQTLxYhYLoqd2OJzjh9suiL3TouHhi2T0FTjILMUEdTIqjzc/JvW8= bad@bad-vm'
-  pacwrite_files:
-    - path: /home/yc-user/startup-script.sh
-      permissions: '0755'
-      content: |
-        #!/bin/bash
-        sudo apt update && \
-        sudo apt install -y git && \
-        cd /home/yc-user && \
-        git clone -b cloud-testapp https://github.com/Otus-DevOps-2024-01/bad-us_infra.git && \
-        cd bad-us_infra && \
-        sudo ./install_mongodb.sh && \
-        sudo ./install_ruby.sh && \
-        cd .. && \
-        sudo /home/yc-user/bad-us_infra/deploy.sh
-    runcmd:
-      - /home/yc-user/startup-script.sh
+packages_update: true
+packages:
+  - ruby-full
+  - ruby-bundler
+  - build-essential
+  - mongodb
+  - git
+runcmd:
+  - sudo systemctl start mongodb
+  - sudo systemctl enable mongodb
+  - git clone -b monolith https://github.com/express42/reddit.git /home/yc-user/reddit
+  - cd /home/yc-user/reddit && bundle install
+  - puma -d
