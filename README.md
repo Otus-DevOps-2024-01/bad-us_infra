@@ -43,9 +43,9 @@ domen name = otusler.completo.su
 
 # Connect:
 
-testapp_IP = 84.201.174.198
+testapp_IP = 158.160.108.33
 testapp_port = 9292
-test_url = http://84.201.174.198:9292
+test_url = http://158.160.108.33:9292
 
 # Scripts
 
